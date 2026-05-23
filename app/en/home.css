@@ -17,7 +17,7 @@
   height: 140%;
   background: radial-gradient(
     circle at center,
-    rgba(255, 59, 92, 0.12),
+    rgba(41, 151, 255, 0.12),
     transparent 62%
   );
   pointer-events: none;
@@ -57,30 +57,10 @@
   align-items: center;
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
-  padding: 0.9rem 1.6rem;
-  border-radius: 12px;
-  font-size: 0.98rem;
-  transition: transform 0.18s ease, background 0.18s ease;
-}
-.btn-primary:hover {
-  background: var(--accent-soft);
-  transform: translateY(-2px);
-}
+/* btn-primary / btn-ghost は globals.css で定義 */
 .btn-lg {
   padding: 1.1rem 2rem;
   font-size: 1.05rem;
-}
-.btn-ghost {
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-  padding: 0.6rem 0.2rem;
-}
-.btn-ghost:hover {
-  color: var(--ink);
 }
 
 /* Hero visual: 4枚のペアアイコン */
@@ -256,7 +236,7 @@
   grid-column: span 2;
   min-height: 210px;
   justify-content: space-between;
-  background: linear-gradient(135deg, var(--surface), #232c3d);
+  background: linear-gradient(135deg, var(--surface), #0d1a2e);
 }
 .combo-pair {
   font-family: var(--font-display);

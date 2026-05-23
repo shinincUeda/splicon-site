@@ -1,33 +1,36 @@
-/* ============ Blog index ============ */
+/* ============================================================
+   Blog — index & article
+   globals.css の変数を継承
+   ============================================================ */
+
+/* ---- Index ---- */
 .blog-index {
-  max-width: 920px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: clamp(3.5rem, 7vw, 6rem) 6% 6rem;
+  padding: clamp(3.5rem, 8vw, 6rem) 24px 6rem;
 }
+
 .blog-index-head {
   margin-bottom: 3.5rem;
 }
 .blog-index-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin-top: 0.8rem;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+  margin-top: .8rem;
+  color: var(--ink);
 }
 .blog-index-lead {
-  margin-top: 1.4rem;
+  margin-top: 1.2rem;
   color: var(--ink-soft);
   max-width: 36em;
   font-size: 1.05rem;
-}
-.eyebrow-alt {
-  color: var(--accent);
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  line-height: 1.7;
 }
 
+/* ---- Post list ---- */
 .post-list {
   list-style: none;
 }
@@ -40,19 +43,22 @@
 .post-list a {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 0.4rem 2rem;
-  padding: 1.8rem 0.5rem;
+  gap: .4rem 2rem;
+  padding: 1.8rem .4rem;
   align-items: baseline;
-  transition: padding-left 0.2s ease, background 0.2s ease;
+  transition: padding-left .2s, background .2s;
+  border-radius: 10px;
 }
 .post-list a:hover {
-  padding-left: 1.2rem;
+  padding-left: 1rem;
   background: var(--bg-soft);
 }
+
 .post-pair {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  color: var(--ink);
 }
 .post-pair .x,
 .combo-pair .x {
@@ -62,72 +68,83 @@
   font-weight: 600;
   grid-column: 2;
   grid-row: 1;
+  color: var(--ink);
 }
 .post-desc {
   grid-column: 2;
   grid-row: 2;
   color: var(--ink-soft);
-  font-size: 0.92rem;
+  font-size: .92rem;
 }
 .blog-empty {
   color: var(--ink-faint);
 }
 
-/* ============ Article ============ */
+/* ---- Article ---- */
 .post {
   max-width: 720px;
   margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) 6% 5rem;
+  padding: clamp(3rem, 6vw, 5rem) 24px 5rem;
 }
+
 .post-breadcrumb {
-  font-size: 0.85rem;
+  font-size: .85rem;
   color: var(--ink-faint);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 .post-breadcrumb a:hover {
   color: var(--accent);
 }
+.post-breadcrumb span {
+  margin: 0 .4em;
+}
+
 .post-h1 {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.6vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--ink);
 }
 .post-sub {
-  margin-top: 1.1rem;
+  margin-top: 1rem;
   color: var(--ink-soft);
-  font-size: 1.12rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.65;
 }
+
+/* ---- Article body ---- */
 .post-body {
-  margin-top: 2.6rem;
+  margin-top: 2.8rem;
   font-size: 1.05rem;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 .post-body h2 {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
-  margin: 2.6rem 0 1rem;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  margin: 3rem 0 1rem;
+  letter-spacing: -.02em;
+  color: var(--ink);
 }
 .post-body h3 {
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin: 2rem 0 0.8rem;
+  margin: 2.2rem 0 .8rem;
+  color: var(--ink);
 }
 .post-body p {
-  margin-bottom: 1.2rem;
-  color: #d3dae5;
+  margin-bottom: 1.3rem;
+  color: var(--ink-soft);
 }
 .post-body ul,
 .post-body ol {
-  margin: 0 0 1.4rem 1.3rem;
-  color: #d3dae5;
+  margin: 0 0 1.4rem 1.4rem;
+  color: var(--ink-soft);
 }
 .post-body li {
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
 }
 .post-body a {
   color: var(--accent);
@@ -136,47 +153,68 @@
 }
 .post-body strong {
   color: var(--ink);
+  font-weight: 600;
 }
 .post-body blockquote {
   border-left: 3px solid var(--accent);
   padding-left: 1.2rem;
-  margin: 1.6rem 0;
+  margin: 1.8rem 0;
   color: var(--ink-soft);
   font-style: italic;
 }
 .post-body code {
   background: var(--surface);
-  padding: 0.15rem 0.4rem;
+  padding: .15rem .4rem;
   border-radius: 5px;
-  font-size: 0.9em;
+  font-size: .9em;
+  color: var(--ink);
+}
+.post-body pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  overflow-x: auto;
+  margin-bottom: 1.6rem;
+}
+.post-body pre code {
+  background: none;
+  padding: 0;
 }
 
-/* 記事末CTA */
+/* ---- Article footer CTA ---- */
 .post-cta {
-  margin-top: 3.5rem;
-  padding: 2.2rem;
+  margin-top: 4rem;
+  padding: 2.2rem 2.4rem;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--surface), #232c3d);
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--bg-soft) 0%, #071523 100%);
 }
 .post-cta h2 {
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
+  font-weight: 600;
+  margin-bottom: .6rem;
+  letter-spacing: -.02em;
+  color: var(--ink);
 }
 .post-cta p {
   color: var(--ink-soft);
   margin-bottom: 1.4rem;
+  font-size: .97rem;
 }
 
+/* ---- Responsive ---- */
 @media (max-width: 640px) {
   .post-list a {
     grid-template-columns: 1fr;
-    gap: 0.3rem;
+    gap: .3rem;
   }
   .post-title,
   .post-desc {
     grid-column: 1;
+  }
+  .post-cta {
+    padding: 1.6rem;
   }
 }

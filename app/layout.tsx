@@ -1,36 +1,40 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const SITE_URL = "https://split-icon.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Splicon — Split View Icon Maker for iPad",
+    default: "Splicon — Split View専用アイコンメーカー",
     template: "%s · Splicon",
   },
   description:
-    "Turn your favorite app pairs into one-tap Split View shortcuts on iPad — with custom icons you can actually tell apart.",
+    "SpliconはiPad向けSplit Viewランチャーアイコン作成アプリ。2つのアプリアイコンを合成し、ショートカットに設定することでタップ1回でSplit Viewを起動。無料3回、Pro版¥480の買い切り。",
   keywords: [
     "iPad Split View",
-    "split screen shortcut",
-    "app pair icon",
-    "iPad multitasking",
-    "home screen shortcut",
+    "Split View アイコン",
+    "iPad マルチタスク",
+    "ショートカット",
+    "Splicon",
   ],
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Splicon — Split View Icon Maker for iPad",
+    title: "Splicon — Split View専用アイコンメーカー",
     description:
-      "One tap. Two apps. Every time. Make custom Split View shortcut icons for iPad.",
+      "2つのアプリを組み合わせたアイコンを自動生成。ショートカット1タップでSplit Viewを起動。",
     siteName: "Splicon",
+    images: [{ url: `${SITE_URL}/images/sp-2.webp` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Splicon — Split View Icon Maker for iPad",
+    title: "Splicon — Split View専用アイコンメーカー",
     description:
-      "One tap. Two apps. Every time. Make custom Split View shortcut icons for iPad.",
+      "2つのアプリを組み合わせたアイコンを自動生成。ショートカット1タップでSplit Viewを起動。",
+    images: [`${SITE_URL}/images/sp-2.webp`],
   },
   alternates: {
     canonical: SITE_URL,
@@ -43,40 +47,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>
-        <header className="site-header">
-          <a href="/" className="logo">
-            <span className="logo-mark">
-              <span />
-              <span />
-            </span>
-            Splicon
-          </a>
-          <nav className="site-nav">
-            <a href="/#how">How it works</a>
-            <a href="/blog">Combos</a>
-            <a
-              className="nav-cta"
-              href="https://apps.apple.com/app/splicon"
-              target="_blank"
-              rel="noopener"
-            >
-              Get the app
-            </a>
-          </nav>
-        </header>
+        <Header />
         {children}
-        <footer className="site-footer">
-          <div>© {new Date().getFullYear()} Splicon. Built for iPad multitaskers.</div>
-          <div style={{ display: "flex", gap: "1.4rem" }}>
-            <a href="/blog">Combos</a>
-            <a href="/#how">How it works</a>
-            <a href="https://apps.apple.com/app/splicon" target="_blank" rel="noopener">
-              App Store
-            </a>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
