@@ -1,0 +1,191 @@
+/* Splicon docs — Design.md に準拠した最小スタイル */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 16px;
+    font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+    color: #333;
+    background: #fafafa;
+}
+
+a {
+    color: #007aff;
+}
+
+.site-header {
+    margin: -16px -16px 16px;
+    padding: 12px 16px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.site-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+}
+
+.brand img {
+    width: 24px;
+    height: 24px;
+}
+
+.site-nav {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.site-nav a {
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0 0 8px;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 24px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #eee;
+}
+
+p,
+li {
+    margin: 0 0 8px;
+}
+
+ul {
+    margin: 0 0 8px;
+    padding-left: 20px;
+}
+
+.meta {
+    margin: 0 0 32px;
+    font-size: 14px;
+    color: #888;
+}
+
+.panel {
+    margin-top: 32px;
+    padding: 16px;
+    background: #f5f5f7;
+    border-radius: 10px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    border: none;
+    padding-bottom: 0;
+}
+
+.panel p:last-child {
+    margin-bottom: 0;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: #007aff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.faq {
+    margin-top: 16px;
+}
+
+.faq-item {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #f5f5f7;
+    border-radius: 10px;
+}
+
+.faq-item strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.faq-item p {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-note {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.footer-note a {
+    color: #888;
+}
+
+.site-footer {
+    max-width: 720px;
+    margin: 16px auto 0;
+    padding: 0 8px;
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.footer-nav a {
+    color: #888;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splicon — Split View専用アイコンメーカー</title>
+    <meta name="description" content="SpliconはiPad向けSplit Viewランチャーアイコン作成アプリです。2つのアプリを組み合わせたアイコンを自動生成し、ショートカットに設定することでタップ1回でSplit Viewを起動できます。無料で3回試用可能、Pro版は¥480の買い切り。iPadOS 17.0以降対応。">
+    <meta property="og:title" content="Splicon — Split View専用アイコンメーカー">
+    <meta property="og:description" content="SpliconはiPad向けSplit Viewランチャーアイコン作成アプリです。2つのアプリを組み合わせたアイコンを自動生成し、ショートカットに設定することでタップ1回でSplit Viewを起動できます。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://split-icon.vercel.app/">
+    <meta property="og:image" content="https://split-icon.vercel.app/images/sp-2.webp">
+    <meta property="og:image:alt" content="SpliconアプリのスクリーンショットとSplit Viewの使用例">
+    <meta property="og:site_name" content="Splicon">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Splicon — Split View専用アイコンメーカー">
+    <meta name="twitter:description" content="SpliconはiPad向けSplit Viewランチャーアイコン作成アプリです。2つのアプリを組み合わせたアイコンを自動生成し、ショートカットに設定することでタップ1回でSplit Viewを起動できます。">
+    <meta name="twitter:image" content="https://split-icon.vercel.app/images/sp-2.webp">
+    <link rel="canonical" href="https://split-icon.vercel.app/">
+    <link rel="alternate" hreflang="ja" href="https://split-icon.vercel.app/">
+    <link rel="alternate" hreflang="en" href="https://split-icon.vercel.app/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://split-icon.vercel.app/index-en.html">
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <style>
+        *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+        :root {
+            --black:#000; --near-black:#1d1d1f; --light-gray:#f5f5f7;
+            --apple-blue:#0071e3; --bright-blue:#2997ff;
+            --dark-surface:#1c1c1e; --dark-card:#2c2c2e;
+        }
+        html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+        body {
+            font-family:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;
+            font-size:17px; font-weight:400; line-height:1.47; letter-spacing:-.374px;
+            color:var(--near-black); background:#fff; overflow-x:hidden;
+            /* 句読点詰め */
+            font-feature-settings:'palt' 1;
+            text-spacing:trim-start allow-end trim-adjacent ideograph-alpha ideograph-numeric;
+            text-spacing-trim:trim-start;
+        }
+        h1,h2,h3 { font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; font-weight:600; }
+
+        /* ── Scroll reveal ── */
+        .reveal,.reveal-left,.reveal-right,.reveal-scale {
+            opacity:0;
+            transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);
+        }
+        .reveal{transform:translateY(36px)} .reveal-left{transform:translateX(-36px)}
+        .reveal-right{transform:translateX(36px)} .reveal-scale{transform:scale(.93)}
+        .reveal.visible,.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
+        .d1{transition-delay:.10s!important} .d2{transition-delay:.20s!important}
+        .d3{transition-delay:.30s!important} .d4{transition-delay:.40s!important}
+        .d5{transition-delay:.50s!important} .d6{transition-delay:.60s!important}
+        .d7{transition-delay:.70s!important}
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; height:52px;
+            background:rgba(0,0,0,.8); backdrop-filter:saturate(180%) blur(20px);
+            -webkit-backdrop-filter:saturate(180%) blur(20px);
+            z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:0 24px;
+        }
+        .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+        .nav-logo  { width:28px; height:28px; }
+        .nav-wordmark {
+            font-size:18px; font-weight:700; letter-spacing:-.6px;
+            background:linear-gradient(120deg,#fff 0%,#b0d8ff 45%,var(--bright-blue) 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .nav-links { display:flex; gap:22px; align-items:center; }
+        .nav-links a { color:#fff; font-size:12px; text-decoration:none; opacity:.82; transition:opacity .2s; }
+        .nav-links a:hover { opacity:1; }
+        .nav-lang {
+            opacity:.55!important; border:1px solid rgba(255,255,255,.3);
+            padding:3px 10px; border-radius:980px;
+        }
+        .nav-lang:hover { opacity:.9!important; }
+        .nav-dl {
+            background:var(--apple-blue); color:#fff!important; padding:5px 14px;
+            border-radius:980px; font-weight:600; opacity:1!important;
+            transition:background .2s,transform .15s!important;
+        }
+        .nav-dl:hover { background:#0077ed; transform:scale(1.05); }
+
+        /* ── Section base ── */
+        section { padding:120px 24px; text-align:center; }
+        .container { max-width:980px; margin:0 auto; }
+
+        /* ══════════════════════════════
+           HERO
+        ══════════════════════════════ */
+        .hero {
+            background:var(--black); color:#fff;
+            padding-top:160px; padding-bottom:130px;
+            overflow:hidden; position:relative;
+        }
+        .hero::before {
+            content:""; position:absolute; top:-8%; left:50%; transform:translateX(-50%);
+            width:960px; height:640px;
+            background:radial-gradient(ellipse at center,rgba(41,151,255,.22) 0%,rgba(0,113,227,.07) 50%,transparent 68%);
+            pointer-events:none; animation:glowPulse 7s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}
+            50%{opacity:1;transform:translateX(-50%) scale(1.09)}
+        }
+        .hero-logo-wrap { margin-bottom:24px; }
+        .hero-logo { width:88px; height:88px; filter:drop-shadow(0 8px 32px rgba(41,151,255,.4)); }
+        .hero-wordmark {
+            font-size:80px; font-weight:800; letter-spacing:-2.5px; line-height:1; margin-bottom:16px;
+            background:linear-gradient(130deg,#fff 0%,#b8dbff 38%,var(--bright-blue) 68%,#a78bff 100%);
+            background-size:200% 200%;
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+            animation:gradShift 5s ease infinite;
+        }
+        @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .hero-tagline {
+            font-size:34px; font-weight:700; letter-spacing:-.5px; line-height:1.2;
+            color:#fff; margin-bottom:14px;
+        }
+        .hero-sub {
+            font-size:18px; font-weight:400; line-height:1.5;
+            color:rgba(255,255,255,.6); max-width:520px; margin:0 auto 48px;
+        }
+        .hero-ctas { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:72px; }
+        .btn-primary {
+            background:var(--apple-blue); color:#fff; padding:14px 36px; border-radius:980px;
+            text-decoration:none; font-size:17px; font-weight:500;
+            transition:background .2s,transform .15s,box-shadow .2s;
+        }
+        .btn-primary:hover { background:#0077ed; transform:scale(1.04); box-shadow:0 8px 28px rgba(0,113,227,.44); }
+        .btn-secondary {
+            background:transparent; color:var(--bright-blue); border:1.5px solid var(--bright-blue);
+            padding:14px 36px; border-radius:980px; text-decoration:none;
+            font-size:17px; font-weight:500; transition:background .2s,color .2s,transform .15s;
+        }
+        .btn-secondary:hover { background:var(--bright-blue); color:#fff; transform:scale(1.04); }
+        .hero-img-wrap {
+            max-width:720px; width:90%; margin:0 auto;
+            border-radius:20px; overflow:hidden;
+            /* 青いグロー */
+            box-shadow:
+                0 0 0 1px rgba(41,151,255,.35),
+                0 0 40px rgba(41,151,255,.20),
+                0 40px 80px rgba(0,0,0,.7);
+            position:relative;
+        }
+        /* 上端に細いグラデーションラインを重ねて境界を明確化 */
+        .hero-img-wrap::before {
+            content:"";
+            position:absolute; inset:0; z-index:1; pointer-events:none;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,.10);
+            background:linear-gradient(
+                180deg,
+                rgba(255,255,255,.06) 0%,
+                transparent 30%
+            );
+        }
+        .hero-img {
+            width:100%; height:auto; display:block;
+            border-radius:20px;
+        }
+
+        /* ══════════════════════════════
+           STATS
+        ══════════════════════════════ */
+        .stats { background:var(--dark-surface); color:#fff; padding:110px 24px; position:relative; overflow:hidden; }
+        .stats::before {
+            content:""; position:absolute; inset:0;
+            background:url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%232997ff' fill-opacity='.05'/%3E%3C/svg%3E");
+            pointer-events:none;
+        }
+        .stats h2 { font-size:52px; line-height:1.07; letter-spacing:-1px; margin-bottom:20px; }
+        .stats h2 em { color:var(--bright-blue); font-style:normal; }
+        .stats .lead { font-size:20px; color:rgba(255,255,255,.58); max-width:680px; margin:0 auto 72px; line-height:1.45; }
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:1100px; margin:0 auto; }
+        .stat-card {
+            background:var(--dark-card); border-radius:20px; padding:40px 18px; text-align:center;
+            border:1px solid rgba(255,255,255,.06);
+            transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+        }
+        .stat-card:hover { transform:translateY(-6px); border-color:rgba(41,151,255,.35); box-shadow:0 20px 60px rgba(41,151,255,.12); }
+        .stat-number { font-size:52px; font-weight:700; line-height:1; letter-spacing:-1.5px; color:var(--bright-blue); margin-bottom:8px; }
+        .stat-unit { font-size:17px; font-weight:500; color:rgba(255,255,255,.82); }
+        .stat-label { margin-top:12px; font-size:13px; color:rgba(255,255,255,.48); line-height:1.45; }
+        .stats-source { margin-top:48px; font-size:12px; color:rgba(255,255,255,.28); }
+
+        /* ══════════════════════════════
+           PROBLEM
+        ══════════════════════════════ */
+        .problem { background:var(--light-gray); color:var(--near-black); }
+        .problem h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:28px; }
+        .problem h2 em { color:var(--apple-blue); font-style:normal; }
+        .problem .lead { font-size:22px; line-height:1.5; color:rgba(0,0,0,.64); max-width:680px; margin:0 auto; }
+        .iq-badge {
+            display:inline-flex; align-items:center; gap:10px; margin-top:36px;
+            padding:16px 28px; background:#fff; border-radius:16px;
+            box-shadow:0 4px 24px rgba(0,0,0,.08); font-size:15px; font-weight:500;
+        }
+
+        /* ══════════════════════════════
+           HOW IT WORKS
+        ══════════════════════════════ */
+        .solution { background:var(--black); color:#fff; }
+        .solution h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:20px; }
+        .solution .lead { font-size:21px; line-height:1.45; color:rgba(255,255,255,.62); max-width:680px; margin:0 auto 64px; }
+        .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+        .step {
+            background:var(--dark-surface); border-radius:22px; padding:44px 30px; text-align:left;
+            border:1px solid rgba(255,255,255,.06);
+            transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+            position:relative; overflow:hidden;
+        }
+        .step::before {
+            content:""; position:absolute; top:0; left:0; right:0; height:2px;
+            background:linear-gradient(90deg,var(--apple-blue),var(--bright-blue));
+            transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.16,1,.3,1);
+        }
+        .step:hover { transform:translateY(-8px); box-shadow:0 24px 60px rgba(0,0,0,.4); }
+        .step:hover::before { transform:scaleX(1); }
+        .step-num {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:44px; height:44px; border-radius:14px; font-weight:700; font-size:20px;
+            background:linear-gradient(135deg,var(--apple-blue),var(--bright-blue));
+            color:#fff; margin-bottom:24px;
+        }
+        .step h3 { font-size:21px; font-weight:600; margin-bottom:10px; letter-spacing:-.3px; }
+        .step p { font-size:15px; color:rgba(255,255,255,.62); line-height:1.55; }
+
+        /* ══════════════════════════════
+           USE CASE AUTO-SCROLL MARQUEE
+        ══════════════════════════════ */
+        .usecases { background:var(--light-gray); color:var(--near-black); }
+        .usecases h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:16px; }
+        .usecases .lead { font-size:21px; line-height:1.45; color:rgba(0,0,0,.6); max-width:680px; margin:0 auto 56px; }
+
+        /* Marquee wrapper – full-bleed */
+        .uc-marquee-wrap {
+            width:100vw; position:relative; left:50%; right:50%;
+            margin-left:-50vw; margin-right:-50vw;
+            overflow:hidden;
+            /* fade edges */
+            -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+        }
+        /* Pause on hover */
+        .uc-marquee-wrap:hover .uc-track { animation-play-state:paused; }
+
+        .uc-track {
+            display:flex; gap:20px; width:max-content;
+            animation:marqueeScroll 52s linear infinite;
+            padding: 12px 0;
+        }
+        @keyframes marqueeScroll {
+            0%   { transform:translateX(0); }
+            100% { transform:translateX(-50%); }
+        }
+
+        /* Each card — wider for landscape 3:2 images */
+        .uc-card {
+            flex:0 0 300px; background:#fff; border-radius:20px; overflow:hidden;
+            box-shadow:0 2px 16px rgba(0,0,0,.08);
+            transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+        }
+        .uc-card:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 16px 48px rgba(0,0,0,.14); }
+
+        /* Image: fixed aspect ratio 3:2 for landscape screenshots */
+        .uc-img-wrap {
+            width:100%; background:#1a1a1a;
+            aspect-ratio:3/2;
+            overflow:hidden;
+        }
+        .uc-img-wrap img {
+            width:100%; height:100%; display:block;
+            object-fit:cover; object-position:top center;
+        }
+        .uc-body { padding:16px 16px 20px; }
+        .uc-tag {
+            display:inline-block; font-size:10px; font-weight:700; letter-spacing:.7px;
+            text-transform:uppercase; padding:3px 9px; border-radius:980px; margin-bottom:7px;
+        }
+        .uc-card h3 { font-size:14px; font-weight:600; margin-bottom:4px; }
+        .uc-card p  { font-size:12px; color:rgba(0,0,0,.54); line-height:1.5; }
+
+        .marquee-hint {
+            margin-top:20px; font-size:13px; color:rgba(0,0,0,.35);
+            display:flex; align-items:center; justify-content:center; gap:6px;
+        }
+
+        /* ══════════════════════════════
+           SHORTCUT SETUP GUIDE
+        ══════════════════════════════ */
+        .setup { background:var(--dark-surface); color:#fff; }
+        .setup h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:16px; }
+        .setup .lead { font-size:21px; line-height:1.45; color:rgba(255,255,255,.6); max-width:680px; margin:0 auto 64px; }
+        .setup-steps {
+            display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+            max-width:1040px; margin:0 auto; align-items:start;
+        }
+        .setup-step {
+            background:var(--dark-card); border-radius:22px; overflow:hidden;
+            border:1px solid rgba(255,255,255,.07);
+            transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+        }
+        .setup-step:hover { transform:translateY(-8px); box-shadow:0 24px 60px rgba(0,0,0,.45); }
+
+        /* Landscape 3:2 aspect ratio for setup guide images */
+        .setup-img {
+            width:100%; background:#111;
+            aspect-ratio:3/2;
+            overflow:hidden;
+        }
+        .setup-img img {
+            width:100%; height:100%; display:block;
+            object-fit:cover; object-position:top center;
+        }
+
+        .setup-body { padding:20px 18px 24px; text-align:left; }
+        .setup-num {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:28px; height:28px; border-radius:9px; font-size:13px; font-weight:700;
+            background:linear-gradient(135deg,var(--apple-blue),var(--bright-blue));
+            color:#fff; margin-bottom:12px;
+        }
+        .setup-step h3 { font-size:15px; font-weight:600; margin-bottom:6px; letter-spacing:-.2px; }
+        .setup-step p  { font-size:13px; color:rgba(255,255,255,.55); line-height:1.5; }
+
+        /* ══════════════════════════════
+           COMPARE
+        ══════════════════════════════ */
+        .compare { background:var(--black); color:#fff; }
+        .compare h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:16px; }
+        .compare h2 em { color:var(--bright-blue); font-style:normal; }
+        .compare .lead { font-size:21px; line-height:1.45; color:rgba(255,255,255,.6); max-width:680px; margin:0 auto 64px; }
+        .compare-table { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:880px; margin:0 auto; }
+        .cmp-card {
+            background:var(--dark-surface); border-radius:22px; padding:36px 32px; text-align:left;
+            border:1px solid rgba(255,255,255,.07);
+        }
+        .cmp-card.after {
+            background:linear-gradient(145deg,#0a2540,#0055b3);
+            border-color:rgba(41,151,255,.28); position:relative; overflow:hidden;
+        }
+        .cmp-card.after::before {
+            content:""; position:absolute; top:-40%; left:-20%; width:140%; height:120%;
+            background:radial-gradient(ellipse at 60% 40%,rgba(41,151,255,.14),transparent 60%);
+            pointer-events:none;
+        }
+        .cmp-card h3 { font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:16px; }
+        .cmp-big { font-size:36px; font-weight:700; letter-spacing:-.5px; margin-bottom:24px; }
+        .cmp-card.after .cmp-big { color:var(--bright-blue); }
+        .cmp-card ul { list-style:none; }
+        .cmp-card li {
+            padding:11px 0; border-bottom:1px solid rgba(255,255,255,.08);
+            font-size:15px; display:flex; align-items:flex-start; gap:12px; color:rgba(255,255,255,.75);
+        }
+        .cmp-card li:last-child { border-bottom:none; }
+        .ic-bad { color:#ff453a; flex-shrink:0; margin-top:2px; }
+        .ic-good { color:#30d158; flex-shrink:0; margin-top:2px; }
+
+        /* ══════════════════════════════
+           FEATURES
+        ══════════════════════════════ */
+        .features { background:var(--light-gray); color:var(--near-black); }
+        .features h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:64px; }
+        .feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+        .feat {
+            background:#fff; border-radius:22px; padding:36px 28px; text-align:left;
+            box-shadow:0 2px 16px rgba(0,0,0,.06);
+            transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+        }
+        .feat:hover { transform:translateY(-8px); box-shadow:0 20px 56px rgba(0,0,0,.12); }
+        .feat-em { font-size:36px; margin-bottom:20px; display:block; transition:transform .3s; }
+        .feat:hover .feat-em { transform:scale(1.15) rotate(-4deg); }
+        .feat h3 { font-size:19px; font-weight:600; margin-bottom:10px; letter-spacing:-.2px; }
+        .feat p  { font-size:15px; color:rgba(0,0,0,.6); line-height:1.55; }
+
+        /* ══════════════════════════════
+           PRICING
+        ══════════════════════════════ */
+        .pricing { background:var(--dark-surface); color:#fff; }
+        .pricing h2 { font-size:58px; line-height:1.06; letter-spacing:-1px; margin-bottom:16px; }
+        .pricing .lead { font-size:21px; color:rgba(255,255,255,.6); max-width:680px; margin:0 auto 64px; line-height:1.4; }
+        .price-cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:760px; margin:0 auto; }
+        .price-card {
+            background:var(--dark-card); border-radius:22px; padding:44px 36px;
+            border:1px solid rgba(255,255,255,.07);
+            transition:transform .3s cubic-bezier(.16,1,.3,1);
+        }
+        .price-card:hover { transform:translateY(-6px); }
+        .price-card.pro {
+            background:linear-gradient(160deg,#0a2540 0%,#003a8c 100%);
+            border-color:rgba(41,151,255,.3); position:relative; overflow:hidden;
+        }
+        .price-card.pro::before {
+            content:""; position:absolute; top:-60%; left:-30%; width:160%; height:160%;
+            background:radial-gradient(ellipse at 50% 30%,rgba(41,151,255,.18),transparent 60%);
+            pointer-events:none;
+        }
+        .rec-badge {
+            position:absolute; top:20px; right:20px;
+            background:var(--bright-blue); color:#fff; font-size:11px; font-weight:700;
+            letter-spacing:.5px; padding:4px 12px; border-radius:980px;
+        }
+        .price-name { font-size:12px; font-weight:600; letter-spacing:.7px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:20px; }
+        .price-amount { font-size:60px; font-weight:700; letter-spacing:-2px; line-height:1; margin-bottom:4px; color:#fff; }
+        .price-note { font-size:13px; color:rgba(255,255,255,.48); margin-bottom:28px; }
+        .price-list { list-style:none; }
+        .price-list li {
+            padding:9px 0; font-size:15px; display:flex; gap:12px; align-items:flex-start;
+            color:rgba(255,255,255,.82); border-bottom:1px solid rgba(255,255,255,.08);
+        }
+        .price-list li:last-child { border-bottom:none; }
+        .price-list li::before { content:"✓"; color:#30d158; font-weight:700; flex-shrink:0; }
+        .price-list.free li::before { color:var(--bright-blue); }
+        .price-cta {
+            display:block; margin-top:28px; padding:12px 0; text-align:center;
+            border-radius:980px; font-size:15px; font-weight:600; text-decoration:none;
+            transition:transform .15s,box-shadow .2s;
+        }
+        .price-card .price-cta { background:rgba(255,255,255,.12); color:#fff; }
+        .price-card.pro .price-cta { background:var(--apple-blue); color:#fff; box-shadow:0 4px 20px rgba(0,113,227,.4); }
+        .price-cta:hover { transform:scale(1.03); box-shadow:0 8px 28px rgba(0,113,227,.5); }
+
+        /* ══════════════════════════════
+           FINAL CTA
+        ══════════════════════════════ */
+        .cta-final { background:var(--black); color:#fff; position:relative; overflow:hidden; }
+        .cta-final::before {
+            content:""; position:absolute; top:-20%; left:50%; transform:translateX(-50%);
+            width:800px; height:500px;
+            background:radial-gradient(ellipse at center,rgba(41,151,255,.18) 0%,transparent 65%);
+            pointer-events:none;
+        }
+        .cta-final h2 { font-size:72px; font-weight:700; line-height:1.04; letter-spacing:-1.5px; margin-bottom:20px; }
+        .cta-final p { font-size:22px; color:rgba(255,255,255,.62); margin-bottom:48px; max-width:520px; margin-left:auto; margin-right:auto; }
+        .app-store-btn {
+            display:inline-flex; align-items:center; gap:12px;
+            background:#fff; color:#000; padding:14px 28px; border-radius:18px;
+            text-decoration:none; font-size:17px; font-weight:600;
+            transition:transform .15s,box-shadow .2s; box-shadow:0 4px 24px rgba(255,255,255,.14);
+        }
+        .app-store-btn:hover { transform:scale(1.05); box-shadow:0 12px 40px rgba(255,255,255,.24); }
+        .cta-sub { margin-top:20px; font-size:14px; color:rgba(255,255,255,.36); }
+
+        /* ── Footer ── */
+        footer {
+            background:var(--black); color:rgba(255,255,255,.44);
+            padding:48px 24px 36px; font-size:12px; line-height:1.5;
+            text-align:center; border-top:1px solid rgba(255,255,255,.07);
+        }
+        .footer-links { margin-bottom:20px; display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+        footer a { color:rgba(255,255,255,.68); text-decoration:none; transition:color .2s; }
+        footer a:hover { color:#fff; }
+
+        /* ── Responsive ── */
+        @media(max-width:834px){
+            section{padding:80px 20px}
+            .hero{padding-top:128px;padding-bottom:80px}
+            .hero-wordmark{font-size:56px;letter-spacing:-1.5px}
+            .hero-tagline{font-size:24px}
+            .hero-img{max-width:100%;border-radius:12px}
+            .stats h2,.problem h2,.solution h2,.usecases h2,.compare h2,
+            .features h2,.pricing h2{font-size:42px;letter-spacing:-.6px}
+            .cta-final h2{font-size:48px}
+            .stats-grid{grid-template-columns:repeat(2,1fr)}
+            .steps,.feat-grid{grid-template-columns:1fr}
+            .compare-table,.price-cards{grid-template-columns:1fr}
+            .setup-steps{grid-template-columns:1fr}
+            .stat-number,.price-amount{font-size:44px}
+            nav .nav-links a:not(.nav-dl){display:none}
+            .uc-card{flex:0 0 260px}
+        }
+        @media(max-width:480px){
+            .hero-wordmark{font-size:40px;letter-spacing:-1px}
+            .hero-tagline{font-size:20px}
+            .stats h2,.problem h2,.solution h2,.usecases h2,.compare h2,
+            .features h2,.pricing h2,.cta-final h2{font-size:32px}
+            .hero-ctas{flex-direction:column;align-items:stretch}
+            .btn-primary,.btn-secondary{text-align:center}
+            .setup-steps{grid-template-columns:1fr}
+            .uc-card{flex:0 0 240px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Splicon",
+      "alternateName": "Split View専用アイコンメーカー",
+      "description": "SpliconはiPad向けSplit Viewランチャーアイコン作成アプリです。2つのアプリを組み合わせたアイコンを自動生成し、ショートカットに設定することでホーム画面タップ1回でSplit Viewを起動できます。App Storeの100万件以上のアプリを検索でき、インストール済みでなくてもOK。",
+      "operatingSystem": "iPadOS 17.0以降, iOS 17.0以降",
+      "applicationCategory": "UtilitiesApplication",
+      "inLanguage": "ja",
+      "url": "https://split-icon.vercel.app/",
+      "downloadUrl": "https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752",
+      "screenshot": "https://split-icon.vercel.app/images/sp-2.webp",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "無料プラン",
+          "description": "アイコン生成3回まで、50:50スタイル",
+          "price": "0",
+          "priceCurrency": "JPY"
+        },
+        {
+          "@type": "Offer",
+          "name": "Splicon Pro",
+          "description": "アイコン生成無制限、全スタイル、仕切り線カスタマイズ、履歴保存、共有機能",
+          "price": "480",
+          "priceCurrency": "JPY"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "shin-inc"
+      },
+      "featureList": [
+        "Split View用ランチャーアイコンの自動生成",
+        "App Storeの100万件以上のアプリを直接検索",
+        "4種類の分割スタイル（50:50、60:40、70:30、斜め）",
+        "仕切り線のカスタマイズ",
+        "アイコン生成履歴の保存と再利用",
+        "完全オンデバイス処理・プライバシー保護"
+      ]
+    }
+    </script>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <a href="#" class="nav-brand">
+        <img src="images/logo.svg" alt="Splicon logo" class="nav-logo">
+        <span class="nav-wordmark">Splicon</span>
+    </a>
+    <div class="nav-links">
+        <a href="#usecases">活用例</a>
+        <a href="#setup">設定方法</a>
+        <a href="#features">機能</a>
+        <a href="#pricing">価格</a>
+        <a href="support.html">サポート</a>
+        <a href="index-en.html" class="nav-lang">English</a>
+        <a href="https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752" target="_blank" rel="noopener" class="nav-dl">App Store</a>
+    </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-logo-wrap reveal">
+            <img src="images/logo.svg" alt="Splicon" class="hero-logo">
+        </div>
+        <div class="hero-wordmark reveal d1">Splicon</div>
+        <h1 class="hero-tagline reveal d2">SplitView用の分割アイコンを一瞬で。</h1>
+        <p class="hero-sub reveal d3">Split View専用アイコンメーカー「Splicon」</p>
+        <div class="hero-ctas reveal d4">
+            <a href="https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752" target="_blank" rel="noopener" class="btn-primary">App Storeでダウンロード</a>
+            <a href="#how-it-works" class="btn-secondary">使い方を見る ›</a>
+        </div>
+        <div class="reveal-scale d5">
+            <div class="hero-img-wrap">
+                <img src="images/sp-2.webp" alt="Splicon スクリーンショット" class="hero-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section class="stats">
+    <div class="container">
+        <h2 class="reveal">あなたの1日は、<em>トグル税</em>で<br>年間5週間分、失われている。</h2>
+        <p class="lead reveal d1">「アプリを切り替えるのは1〜2秒」。その積み重ねが、1年で驚くほど大きくなる。</p>
+        <div class="stats-grid">
+            <div class="stat-card reveal d1"><div class="stat-number" data-target="1200" data-suffix="回">0</div><div class="stat-label">1日のアプリ切り替え平均回数</div></div>
+            <div class="stat-card reveal d2"><div class="stat-number" data-target="9.5" data-suffix="分" data-dec>0</div><div class="stat-label">切り替え後、集中を取り戻すまでの時間</div></div>
+            <div class="stat-card reveal d3"><div class="stat-number" data-target="40" data-suffix="%">0</div><div class="stat-label">生産的時間の消失率</div></div>
+            <div class="stat-card reveal d4"><div class="stat-number" data-target="5" data-suffix="週間">0</div><div class="stat-label">1人あたり年間の労働時間損失</div></div>
+        </div>
+        <p class="stats-source reveal">出典: American Psychological Association / Wichita State University / Jon Peddie Research ほか</p>
+    </div>
+</section>
+
+<!-- ══ PROBLEM ══ -->
+<section class="problem">
+    <div class="container">
+        <h2 class="reveal">集中できないのは、<br><em>あなたのせいじゃない。</em></h2>
+        <p class="lead reveal d1">重度のマルチタスクはワーキングメモリを過負荷にし、<br>一時的にIQを10ポイント低下させることが確認されています。<br>それは意志の弱さではなく、環境設計の問題です。</p>
+        <div class="reveal d2">
+            <div class="iq-badge">
+                <span style="font-size:24px">🧠</span>
+                <span>マルチタスク中は IQが最大 <strong>10ポイント</strong> 低下すると報告されています</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="solution" id="how-it-works">
+    <div class="container">
+        <h2 class="reveal">アイコンを作るだけ。<br>あとはショートカットに設定する。</h2>
+        <p class="lead reveal d1">Spliconがやるのは「美しいアイコンの生成」。<br>ショートカットアプリに設定すれば、次からは即座にSplit Viewを呼び出せます。</p>
+        <div class="steps">
+            <div class="step reveal d1">
+                <div class="step-num">1</div>
+                <h3>2つのアプリを選ぶ</h3>
+                <p>100万件以上のApp Storeアプリから、よく使う組み合わせを検索して選択。インストール済みでなくてもOK。</p>
+            </div>
+            <div class="step reveal d2">
+                <div class="step-num">2</div>
+                <h3>アイコンを生成・保存</h3>
+                <p>分割スタイルを選んでアイコンを生成。写真ライブラリへ保存するだけで完了。</p>
+            </div>
+            <div class="step reveal d3">
+                <div class="step-num">3</div>
+                <h3>ショートカットに設定</h3>
+                <p>ショートカットアプリで「画面分割」アクションを設定し、アイコンに先ほどの画像を指定するだけ。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ USE CASE MARQUEE ══ -->
+<section class="usecases" id="usecases">
+    <div class="container">
+        <h2 class="reveal">どんな場面にも、<br>最適な組み合わせを。</h2>
+        <p class="lead reveal d1">リサーチ・学習・仕事・エンタメ。Spliconで作ったアイコンが、あらゆるシーンで活躍します。</p>
+    </div>
+
+    <!-- Full-bleed auto-scroll strip -->
+    <div class="uc-marquee-wrap">
+        <div class="uc-track" id="ucTrack">
+
+            <!-- ── オリジナル 7枚 ── -->
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-1.webp" alt="YouTube + X" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#fff0f0;color:#cc0000">動画</span><h3>YouTube + X</h3><p>動画を見ながら関連ポストを同時チェック。情報密度が上がる。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-2.webp" alt="Safari + メモ" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8f4ff;color:#0071e3">リサーチ</span><h3>Safari + メモ</h3><p>調べながら即メモ。コピペ不要で思考が途切れない。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-3.webp" alt="ファイル + Slack" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#fff0e8;color:#c85000">チームワーク</span><h3>ファイル + Slack</h3><p>資料を確認しながらSlackで即共有。ファイルのやり取りがスムーズ。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-4.webp" alt="Zoom + Notion" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8ffe8;color:#1a7a3a">ミーティング</span><h3>Zoom + Notion</h3><p>会議を見ながらリアルタイム議事録。清書が不要に。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-5.webp" alt="Netflix + ChatGPT" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#ffe8e8;color:#c00">エンタメ / AI</span><h3>Netflix + ChatGPT</h3><p>動画を流しながらAIにその場で質問。インプットが倍になる。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-6.webp" alt="Moneytree + 計算機" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8ffe8;color:#1a7a3a">家計管理</span><h3>Moneytree + 計算機</h3><p>家計簿を見ながら電卓で即計算。収支管理がスムーズに。</p></div>
+            </div>
+            <div class="uc-card">
+                <div class="uc-img-wrap"><img src="images/sp-7.webp" alt="Kindle + Obsidian" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8f0ff;color:#3040c4">読書・学習</span><h3>Kindle + Obsidian</h3><p>本を読みながら重要箇所をすぐObsidianに記録。知識を体系化。</p></div>
+            </div>
+
+            <!-- ── シームレスループ用 複製 ── -->
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-1.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#fff0f0;color:#cc0000">動画</span><h3>YouTube + X</h3><p>動画を見ながら関連ポストを同時チェック。情報密度が上がる。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-2.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8f4ff;color:#0071e3">リサーチ</span><h3>Safari + メモ</h3><p>調べながら即メモ。コピペ不要で思考が途切れない。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-3.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#fff0e8;color:#c85000">チームワーク</span><h3>ファイル + Slack</h3><p>資料を確認しながらSlackで即共有。ファイルのやり取りがスムーズ。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-4.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8ffe8;color:#1a7a3a">ミーティング</span><h3>Zoom + Notion</h3><p>会議を見ながらリアルタイム議事録。清書が不要に。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-5.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#ffe8e8;color:#c00">エンタメ / AI</span><h3>Netflix + ChatGPT</h3><p>動画を流しながらAIにその場で質問。インプットが倍になる。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-6.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8ffe8;color:#1a7a3a">家計管理</span><h3>Moneytree + 計算機</h3><p>家計簿を見ながら電卓で即計算。収支管理がスムーズに。</p></div>
+            </div>
+            <div class="uc-card" aria-hidden="true">
+                <div class="uc-img-wrap"><img src="images/sp-7.webp" alt="" loading="lazy"></div>
+                <div class="uc-body"><span class="uc-tag" style="background:#e8f0ff;color:#3040c4">読書・学習</span><h3>Kindle + Obsidian</h3><p>本を読みながら重要箇所をすぐObsidianに記録。知識を体系化。</p></div>
+            </div>
+
+        </div><!-- /uc-track -->
+    </div><!-- /uc-marquee-wrap -->
+
+    <div class="marquee-hint reveal">
+        <span>ホバーで一時停止します</span>
+    </div>
+</section>
+
+<!-- ══ SHORTCUT SETUP GUIDE ══ -->
+<section class="setup" id="setup">
+    <div class="container">
+        <h2 class="reveal">ショートカットの設定は<br>4ステップで完了。</h2>
+        <p class="lead reveal d1">アプリが案内するとおりに操作するだけ。はじめての方でも迷わず設定できます。</p>
+        <div class="setup-steps">
+            <div class="setup-step reveal d1">
+                <div class="setup-img"><img src="images/sp-11.webp" alt="アプリを選択" loading="lazy"></div>
+                <div class="setup-body"><div class="setup-num">1</div><h3>2つのアプリを選ぶ</h3><p>検索から組み合わせたいアプリを2つ選ぶと、自動でアイコンが生成されます。</p></div>
+            </div>
+            <div class="setup-step reveal d2">
+                <div class="setup-img"><img src="images/sp-9.webp" alt="写真に保存" loading="lazy"></div>
+                <div class="setup-body"><div class="setup-num">2</div><h3>写真に保存</h3><p>生成したアイコンを写真ライブラリに保存。ショートカット設定に使います。</p></div>
+            </div>
+            <div class="setup-step reveal d3">
+                <div class="setup-img"><img src="images/sp-8.webp" alt="アイコンを設定" loading="lazy"></div>
+                <div class="setup-body"><div class="setup-num">3</div><h3>ショートカットにアイコンを設定</h3><p>ショートカットアプリで「写真を選択」から保存したアイコンを指定します。</p></div>
+            </div>
+            <div class="setup-step reveal d4">
+                <div class="setup-img"><img src="images/sp-12.webp" alt="ホーム画面に設置" loading="lazy"></div>
+                <div class="setup-body"><div class="setup-num">4</div><h3>ホーム画面に設置</h3><p>ショートカットをホーム画面に追加すれば完成。タップ1回でSplit Viewが起動します。</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ COMPARE ══ -->
+<section class="compare">
+    <div class="container">
+        <h2 class="reveal">小さな摩擦が、<br><em>大きな損失</em>をつくる。</h2>
+        <p class="lead reveal d1">従来のiPadOSで毎回Split Viewを開くには複数の操作が必要でした。<br>Spliconのアイコンで、それをたったの1タップに。</p>
+        <div class="compare-table">
+            <div class="cmp-card reveal-left">
+                <h3>Before — 従来の操作</h3>
+                <div class="cmp-big">5〜8<span style="font-size:20px;opacity:.64;font-weight:400"> ステップ</span></div>
+                <ul>
+                    <li><span class="ic-bad">✕</span>アプリを長押しして探す</li>
+                    <li><span class="ic-bad">✕</span>メニューから画面分割を選ぶ</li>
+                    <li><span class="ic-bad">✕</span>2つ目のアプリを探して起動</li>
+                    <li><span class="ic-bad">✕</span>画面比率を手動で調整</li>
+                    <li><span class="ic-bad">✕</span>意図しないウィンドウ重なり</li>
+                </ul>
+            </div>
+            <div class="cmp-card after reveal-right">
+                <h3>After — Spliconアイコンで</h3>
+                <div class="cmp-big" style="color:#2997ff">1<span style="font-size:20px;opacity:.72;font-weight:400"> タップ</span></div>
+                <ul>
+                    <li><span class="ic-good">✓</span>ホーム画面のアイコンをタップ</li>
+                    <li><span class="ic-good">✓</span>指定した比率で即座に展開</li>
+                    <li><span class="ic-good">✓</span>予測可能なレイアウト</li>
+                    <li><span class="ic-good">✓</span>認知負荷ゼロ</li>
+                    <li><span class="ic-good">✓</span>タイピングをすぐに開始</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section class="features" id="features">
+    <div class="container">
+        <h2 class="reveal">作業を、もっと、速く。</h2>
+        <div class="feat-grid">
+            <div class="feat reveal d1"><span class="feat-em">⚡</span><h3>瞬間起動</h3><p>アイコンをタップすれば、2つのアプリが完璧な比率で即座に展開します。</p></div>
+            <div class="feat reveal d2"><span class="feat-em">🎨</span><h3>美しいアイコン</h3><p>実際のアプリアイコンを合成。ホーム画面に違和感なくなじむデザイン。</p></div>
+            <div class="feat reveal d3"><span class="feat-em">📐</span><h3>4つの分割スタイル</h3><p>50:50、60:40、70:30、斜め分割。作業に最適な比率を選択できます。</p></div>
+            <div class="feat reveal d4"><span class="feat-em">🔍</span><h3>100万件から検索</h3><p>App Storeの全アプリを直接検索。インストール済みでなくてもOK。</p></div>
+            <div class="feat reveal d5"><span class="feat-em">📝</span><h3>履歴から再利用</h3><p>過去の組み合わせを保存。気に入ったレイアウトをすぐに復元できます。</p></div>
+            <div class="feat reveal d6"><span class="feat-em">🔐</span><h3>プライバシー最優先</h3><p>すべてデバイス上で処理。データは一切外部に送信されません。</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2 class="reveal">買い切り。<br>サブスクなし。</h2>
+        <p class="lead reveal d1">まずは無料で3回お試し。納得してから、たった1回のお支払いで一生使えます。</p>
+        <div class="price-cards">
+            <div class="price-card reveal-left">
+                <div class="price-name">無料</div>
+                <div class="price-amount">¥0</div>
+                <div class="price-note">今すぐ試す</div>
+                <ul class="price-list free">
+                    <li>アイコン生成 3回まで</li>
+                    <li>50:50スタイル</li>
+                    <li>写真ライブラリに保存</li>
+                </ul>
+                <a href="https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752" target="_blank" rel="noopener" class="price-cta">無料でダウンロード</a>
+            </div>
+            <div class="price-card pro reveal-right" style="position:relative">
+                <span class="rec-badge">おすすめ</span>
+                <div class="price-name">Splicon Pro</div>
+                <div class="price-amount">¥480</div>
+                <div class="price-note">一度の支払いで永続利用</div>
+                <ul class="price-list">
+                    <li>アイコン生成 <strong>無制限</strong></li>
+                    <li>すべての分割スタイル</li>
+                    <li>仕切り線のカスタマイズ</li>
+                    <li>作成履歴の保存・再利用</li>
+                    <li>共有機能（AirDrop等）</li>
+                </ul>
+                <a href="https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752" target="_blank" rel="noopener" class="price-cta">App Storeで入手</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="cta-final" id="download">
+    <div class="container">
+        <h2 class="reveal">まずは無料で、<br>Spliconを作成。</h2>
+        <p class="reveal d1">まずは無料で、3つのSplit Viewアイコンを作ってみてください。</p>
+        <div class="reveal d2">
+            <a href="https://apps.apple.com/jp/app/splicon-split-view%E5%B0%82%E7%94%A8%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%83%A1%E3%83%BC%E3%82%AB%E3%83%BC/id6762535752" class="app-store-btn" target="_blank" rel="noopener">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect width="28" height="28" rx="6.5" fill="black"/>
+                    <path d="M14 4.5C14 4.5 9.5 4.5 7.2 9C5 13.5 6 18 6 18H9.5C9.5 18 8.9 14.5 10.6 11.7C12.3 8.9 14 8.9 14 8.9C14 8.9 15.7 8.9 17.4 11.7C19.1 14.5 18.5 18 18.5 18H22C22 18 23 13.5 20.8 9C18.5 4.5 14 4.5 14 4.5Z" fill="white"/>
+                    <path d="M9.5 18L7 24H11L12.8 19.5H15.2L17 24H21L18.5 18H9.5Z" fill="white"/>
+                </svg>
+                App Storeでダウンロード（無料）
+            </a>
+        </div>
+        <p class="cta-sub reveal d3">iPadOS 17.0以降 / iOS 17.0以降 対応</p>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-links">
+        <a href="support.html">サポート</a>
+        <a href="privacy-policy.html">プライバシーポリシー</a>
+        <a href="#features">機能</a>
+        <a href="#pricing">価格</a>
+        <a href="index-en.html">English</a>
+    </div>
+    <p>© 2026 shin-inc. All rights reserved.</p>
+    <p style="margin-top:8px;opacity:.55">Splicon is not affiliated with Apple Inc. iPad, iPadOS, and Split View are trademarks of Apple Inc.</p>
+</footer>
+
+<script>
+// ── Scroll reveal ──
+(function(){
+    var els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('visible')});return;}
+    var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+    },{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+    els.forEach(function(el){io.observe(el);});
+})();
+
+// ── Counter animation ──
+(function(){
+    function ease(t){return t===1?1:1-Math.pow(2,-10*t);}
+    function run(el,target,dec,suffix){
+        var dur=1800,start=performance.now();
+        (function tick(now){
+            var p=Math.min((now-start)/dur,1),v=target*ease(p);
+            el.textContent=(dec?v.toFixed(1):Math.floor(v).toLocaleString())+suffix;
+            if(p<1)requestAnimationFrame(tick);
+        })(start);
+    }
+    var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(!e.isIntersecting||e.target._done)return;
+            e.target._done=true;
+            run(e.target,parseFloat(e.target.dataset.target),e.target.hasAttribute('data-dec'),e.target.dataset.suffix||'');
+        });
+    },{threshold:.3});
+    document.querySelectorAll('.stat-number[data-target]').forEach(function(c){io.observe(c);});
+})();
+</script>
+</body>
+</html>
