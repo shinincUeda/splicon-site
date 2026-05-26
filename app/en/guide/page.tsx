@@ -6,16 +6,16 @@ const SITE = "https://www.splitview.net";
 const URL = `${SITE}/en/guide`;
 
 export const metadata: Metadata = {
-  title: "How to Launch Split View in One Tap on iPad — Splicon Guide",
+  title: "Maximize iPad Multitasking: Set Up 1-Tap Split View Icons in 5 Minutes with Splicon",
   description:
-    "Set up a one-tap Split View shortcut for any two iPad apps in 5 minutes. Splicon generates a custom icon and automates the Shortcut so you never have to drag from the Dock again.",
+    "Turn Split View into an effortless daily habit. Splicon generates custom side-by-side app icons for your Home Screen so you can launch two apps instantly with a single tap.",
   keywords: [
     "iPad Split View one tap",
     "Split View shortcut iPad",
-    "iPad multitasking tip",
-    "Splicon guide",
-    "how to use Split View iPad",
-    "iPad productivity",
+    "iPad multitasking guide",
+    "Splicon app tutorial",
+    "iPad productivity tips",
+    "iPad mini US stock trading",
   ],
   alternates: {
     canonical: URL,
@@ -24,92 +24,49 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: URL,
-    title: "How to Launch Split View in One Tap on iPad — Splicon Guide",
+    title: "Maximize iPad Multitasking: Set Up 1-Tap Split View Icons in 5 Minutes with Splicon",
     description:
-      "Set up a one-tap Split View shortcut for any two iPad apps in 5 minutes.",
+      "Stop messing with the Dock every time. Turn any two iPad apps into a permanent, 1-tap Home Screen shortcut.",
   },
 };
-
-const COMBOS = [
-  {
-    label: "ChatGPT × YouTube",
-    slug: "chatgpt-youtube",
-    desc: "Watch while you wait for AI responses",
-  },
-  {
-    label: "Gmail × Google Calendar",
-    slug: "gmail-google-calendar",
-    desc: "Check your inbox and schedule at the same time",
-  },
-  {
-    label: "Slack × Notion",
-    slug: "slack-notion",
-    desc: "Turn chat into documentation without switching apps",
-  },
-  {
-    label: "YouTube × GoodNotes",
-    slug: "goodnotes-youtube",
-    desc: "Take notes while watching a lecture",
-  },
-  {
-    label: "Kindle × Obsidian",
-    slug: "kindle-obsidian",
-    desc: "Build a reading log as you go",
-  },
-  {
-    label: "ChatGPT × Notion",
-    slug: "chatgpt-notion",
-    desc: "Draft, refine, and save ideas in one view",
-  },
-  {
-    label: "Zoom × GoodNotes",
-    slug: "zoom-goodnotes",
-    desc: "Handwrite meeting notes during a call",
-  },
-  {
-    label: "Duolingo × YouTube",
-    slug: "duolingo-youtube",
-    desc: "Language practice with native content side by side",
-  },
-];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "How to Launch Split View in One Tap on iPad",
+  name: "How to Launch iPad Split View in One Tap using Splicon",
   description:
-    "Use Splicon to create a custom icon and Shortcut that opens any two iPad apps in Split View with a single tap from your Home Screen.",
+    "Learn how to create a custom combined icon and iOS Shortcut to launch any two iPad apps in Split View with a single tap.",
   totalTime: "PT5M",
   step: [
     {
       "@type": "HowToStep",
       position: 1,
       name: "Download Splicon",
-      text: "Install Splicon from the App Store — free for your first 3 pairs.",
+      text: "Search for Splicon on the App Store and download it for free.",
     },
     {
       "@type": "HowToStep",
       position: 2,
-      name: "Pick your two apps",
-      text: "Select any two apps you want to use in Split View.",
+      name: "Select Your Apps",
+      text: "Search for and select the two apps you want to use side by side.",
     },
     {
       "@type": "HowToStep",
       position: 3,
-      name: "Generate the icon",
-      text: "Splicon combines both app icons into a single side-by-side image.",
+      name: "Generate the Icon Image",
+      text: "Splicon automatically merges both app logos into a single side-by-side shortcut image.",
     },
     {
       "@type": "HowToStep",
       position: 4,
-      name: "Save and set up the Shortcut",
-      text: "Save the icon to Photos, then use the Shortcuts app to assign it as a Home Screen icon.",
+      name: "Save to Photos",
+      text: "Save the newly generated combined icon to your iPad's photo library.",
     },
     {
       "@type": "HowToStep",
       position: 5,
-      name: "Add to Home Screen",
-      text: "Place the shortcut icon in a prominent spot. One tap now opens both apps in Split View.",
+      name: "Configure the iOS Shortcut",
+      text: "Open the built-in iOS Shortcuts app, create a Split View shortcut, and assign the saved image as its Home Screen icon.",
     },
   ],
 };
@@ -122,146 +79,167 @@ export default function GuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <article className="post-article guide-article">
-
         <p className="post-breadcrumb"><a href="/en/blog">Combos</a> / Guide</p>
+        
         <h1 className="post-h1">
-          How to launch Split View in one tap on iPad
+          Maximize iPad Multitasking: Set Up 1-Tap Split View Icons in 5 Minutes with Splicon
         </h1>
         <p className="post-sub">
-          Set up a custom Home Screen shortcut for any app pair in 5 minutes —
-          no dragging from the Dock ever again.
+          Stop resetting your workspace every single time. Turn your iPad from a simple video player into a powerhouse productivity terminal for the AI era.
         </p>
 
-        {/* Problem */}
-        <h2>The problem with Split View</h2>
+        {/* Chapter 1 */}
+        <h2>Chapter 1: Are You Really Making the Most of iPad's Split View?</h2>
         <p>
-          Split View on iPad is genuinely useful. Two apps, side by side, no
-          context-switching. But almost nobody uses it regularly — because
-          opening it every time is a pain.
+          Almost every iPad user knows about Split View—the ability to divide the screen and run two apps simultaneously. It is arguably one of the greatest weapons in the iPadOS arsenal.
         </p>
         <p>
-          The standard flow: open app A, swipe up from the Dock to find app B,
-          drag it to the edge, hope it lands right. Do that ten times a day and
-          you stop bothering.
+          Yet, many people admit: <em>&ldquo;I know the feature exists, but setting it up every time is such a hassle that I just end up using one app at a time.&rdquo;</em>
+        </p>
+        <p>
+          Think about the usual workflow: open the first app, swipe up to reveal the Dock (or fiddle with Stage Manager), drag the second app over, try to drop it perfectly, and adjust the split ratio. Doing this repeatedly feels slower than just switching apps on a single screen.
+        </p>
+        <p>
+          By the time you finish reading this guide, you will have a system that turns multitasking into a permanent habit. All it takes is a 5-minute initial setup to create custom icons. From then on, a single tap on your Home Screen launches your favorite app pairs instantly.
         </p>
 
-        {/* Solution */}
-        <h2>The fix: a one-tap Home Screen icon</h2>
+        {/* Chapter 2 */}
+        <h2>Chapter 2: Why the iPad is the Ultimate Tool for &ldquo;Parallel Tasks&rdquo;</h2>
         <p>
-          <strong>Splicon</strong> turns any app pair into a permanent Home
-          Screen shortcut. You set it up once — it takes about 5 minutes — and
-          from then on it&apos;s one tap.
+          Why does Split View matter so much? Because when it comes to lighter, casual multitasking, the iPad reigns supreme over both PCs and smartphones.
+        </p>
+        <h3>Not a PC, Not a Phone—The iPad Sweet Spot</h3>
+        <p>
+          Laptops are powerful, but pulling one out of a backpack requires an intentional effort that raises the mental friction for quick sessions. Laptops feel like tools for &ldquo;heavy work.&rdquo; They are overkill for taking notes in bed or checking Slack while reading a document on the train. On the other hand, smartphones offer ultimate portability, but their screens are too cramped to make dual-window multitasking practical.
         </p>
         <p>
-          The key difference from a plain Shortcuts icon: Splicon generates a
-          combined image using the actual app icons of both apps, side by side.
-          You can glance at your Home Screen and instantly know which pair each
-          icon launches, without reading any text.
+          The iPad perfectly balances <strong>portability, screen size, and Split View capabilities</strong>. It excels at low-friction, high-impact tasks:
+        </p>
+        <ul>
+          <li>Taking notes in Apple Notes while watching an online course on the couch.</li>
+          <li>Jotting down meeting minutes in Notion during a Zoom call at a café.</li>
+          <li>Analyzing stock charts on a trading app while reading financial news in bed.</li>
+          <li>Copying highlights to Obsidian while reading a Kindle book on your commute.</li>
+        </ul>
+        <p>
+          These are tasks you <em>could</em> do on a PC, but doing so feels cumbersome. With an iPad, you open the cover and you are ready to go in seconds. The ability to seamlessly jump into Split View dictates whether your iPad achieves its true potential.
+        </p>
+
+        {/* Chapter 3 */}
+        <h2>Chapter 3: The Ultimate Fix—Put Split Icons on Your Home Screen</h2>
+        <p>
+          The solution is simple: Stop setting up Split View manually. Instead, use <strong>Splicon</strong> to generate custom shortcuts directly on your Home Screen once and for all.
+        </p>
+        <p>
+          Splicon is a dedicated iPad utility that merges two distinct app logos into a single, side-by-side icon image. 
+        </p>
+        <p>
+          While Apple's native Shortcuts app lets you build Split View automations, it limits icon choices to generic glyphs or emojis. If you set up multiple pairs like &ldquo;Safari × Notes&rdquo; and &ldquo;Zoom × Notes,&rdquo; they quickly become indistinguishable. Splicon solves this by producing an instant visual layout of both apps, letting you know exactly what a shortcut opens at a single glance.
         </p>
 
         {/* Before / After */}
         <div className="guide-compare">
           <div className="guide-compare-col guide-compare-before">
-            <p className="guide-compare-label">Before</p>
+            <p className="guide-compare-label">Before (The Friction-Heavy Way)</p>
             <ol>
-              <li>Open app A</li>
+              <li>Open App A</li>
               <li>Swipe up to reveal the Dock</li>
-              <li>Find app B</li>
-              <li>Drag it to the side</li>
-              <li>Adjust the split ratio</li>
+              <li>Find App B</li>
+              <li>Drag and drop it precisely to the side</li>
+              <li>Manually adjust the split ratio</li>
             </ol>
-            <p className="guide-compare-result">→ 6 steps, every single time</p>
+            <p className="guide-compare-result">&rarr; 5 tedious steps, every single time</p>
           </div>
           <div className="guide-compare-col guide-compare-after">
-            <p className="guide-compare-label">After Splicon</p>
+            <p className="guide-compare-label">After Splicon (Zero Friction)</p>
             <ol>
-              <li>Tap the icon on your Home Screen</li>
+              <li>Tap the combined icon on your Home Screen</li>
             </ol>
-            <p className="guide-compare-result">→ Done</p>
+            <p className="guide-compare-result">&rarr; Done. Ready to work instantly.</p>
           </div>
         </div>
 
-        {/* Setup */}
-        <h2>5-minute setup</h2>
+        <h3>The Psychology of Visual Cues</h3>
+        <p>
+          Behavioral science proves that our actions are driven far more by immediate environmental triggers than by sheer willpower. If an icon representing your workflow is staring right at you from your Home Screen, your brain naturally prompts you to tap it. If the feature requires manual dragging every time, your brain skips it out of convenience.
+        </p>
+
+        {/* Chapter 4 */}
+        <h2>Chapter 4: The 5-Minute Setup Guide</h2>
+        <p>Getting started with Splicon is straightforward:</p>
         <ol className="guide-steps">
           <li>
-            <strong>Download Splicon</strong> — free for your first 3 pairs.{" "}
-            <a
-              href="https://apps.apple.com/us/app/splicon-split-view-icon-maker/id6762535752"
-              target="_blank"
-              rel="noopener"
-            >
-              Get it on the App Store
-            </a>
+            <strong>Download Splicon</strong> — Search for it on the App Store. It is entirely free to try for your first few pairs.
           </li>
           <li>
-            <strong>Pick two apps</strong> — choose any two you want open side
-            by side.
+            <strong>Select Two Apps</strong> — Search for the official App Store logos of the two apps you want to pair side by side.
           </li>
           <li>
-            <strong>Generate the icon</strong> — Splicon combines both app icons
-            into one image automatically.
+            <strong>Generate the Icon Image</strong> — Splicon automatically stitches the two logos into a perfectly balanced icon.
           </li>
           <li>
-            <strong>Save to Photos</strong> — the combined icon image is saved
-            to your photo library.
+            <strong>Save to Photos</strong> — Export the combined image straight to your iPad&apos;s camera roll.
           </li>
           <li>
-            <strong>Create the Shortcut</strong> — open the Shortcuts app, add
-            a new shortcut, set the Home Screen icon to the image you just
-            saved.
+            <strong>Configure the iOS Shortcut</strong> — Open the built-in Shortcuts app, add a Split View action for those apps, and choose your saved image as the Home Screen icon.
           </li>
           <li>
-            <strong>Add to Home Screen</strong> — put it somewhere visible.
-            Front page or Dock works best.
+            <strong>Place on Home Screen</strong> — Drop the new shortcut onto your primary page or your Dock for immediate access.
           </li>
         </ol>
         <p>
-          That&apos;s it. The next time you want those two apps open together,
-          tap the icon once.
+          <em>Note: Splicon is designed exclusively for iPad and requires iPadOS 15 or later on Split View-compatible models. The free version easily handles your core pairs, while a one-time Pro upgrade unlocks unlimited pairs and a convenient history log.</em>
         </p>
 
-        {/* Why it works */}
-        <h2>Why a visible icon matters</h2>
+        {/* Chapter 5 */}
+        <h2>Chapter 5: 12 Essential Split View Combinations to Set Up First</h2>
         <p>
-          Behavior research consistently shows that visual cues drive action far
-          more reliably than intention. If the shortcut is on your Home Screen
-          where you see it, you use it. If it&apos;s buried in the Shortcuts
-          app, you don&apos;t.
+          To kickstart your productivity, we have curated twelve highly effective app pairs — from work and learning to AI productivity and daily life. Each guide explains why the pair works and how to turn it into a one-tap Home Screen shortcut.
         </p>
         <p>
-          The combined icon does two things: it acts as that visual trigger, and
-          it tells you exactly what will happen when you tap it. No guessing.
+          Browse every combination with setup tips in our{" "}
+          <a href="/en/blog"><strong>Split View combo library</strong></a>.
         </p>
 
-        {/* Combos */}
-        <h2>Pairs worth setting up first</h2>
+        {/* Chapter 6 */}
+        <h2>Chapter 6: Tips for Making Multitasking a Lasting Habit</h2>
+        <p>You do not need to create dozens of combinations overnight. Follow these three simple rules to make it stick:</p>
+        <ol>
+          <li>
+            <strong>Start with Your Top Habit:</strong> Use the free version of Splicon to build the single pair you would benefit from most every day (like ChatGPT × YouTube or Kindle × Notebook).
+          </li>
+          <li>
+            <strong>Give It Prime Real Estate:</strong> Place the shortcut in your Dock or the top row of your Home Screen. Remember: visibility equals action.
+          </li>
+          <li>
+            <strong>Iterate with Pro:</strong> Once you realize how jarring it feels to go back to a single-tasking layout, upgrade to the Pro version. The Pro tier is a one-time lifetime purchase that gives you unlimited icons and a history log for seamless adjustments.
+          </li>
+        </ol>
+
+        {/* Chapter 7 & Bonus */}
+        <h2>Chapter 7: Designing an &ldquo;iPad-First&rdquo; Workflow</h2>
         <p>
-          The best Split View pairs are the ones you&apos;d use every day if
-          they were easier to open. Here are eight that consistently make the
-          difference:
+          The true magic of the iPad unfolds when you stop treating it like a large phone and start designing it as a multi-window dashboard. Spend 5 minutes setting up your favorite combination today, and watch how drastically your iPad usage evolves over the coming week.
         </p>
-        <ul className="guide-combo-list">
-          {COMBOS.map((c) => (
-            <li key={c.slug}>
-              <a href={`/en/blog/${c.slug}`}>
-                <strong>{c.label}</strong>
-              </a>{" "}
-              — {c.desc}
-            </li>
-          ))}
-        </ul>
-        <p>
-          Each link above has a dedicated setup guide with step-by-step
-          instructions for that specific pair.
-        </p>
+
+        <div className="bonus-section" style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px", marginTop: "30px", backgroundColor: "#f9f9f9" }}>
+          <h3>💡 Special Focus: The Ultimate Environment for US Stock Investors</h3>
+          <p>
+            For those analyzing the US stock market, an <strong>iPad mini</strong> paired with Split View is arguably the ultimate setup. 
+          </p>
+          <p>
+            The US market opens late in the evening and closes early in the morning (Japan time). This means tracking market movements usually happens while relaxing in bed or on the couch—environments where a heavy laptop feels intrusive but a smartphone screen is too small to study detailed charts.
+          </p>
+          <p>
+            An iPad mini solves this. By launching a custom Split View icon like <strong>TradingView × X (Twitter)</strong>, you can track real-time chart candles on one half while monitoring market sentiment on the other. Because the device is small enough to hold with both hands, your thumbs can reach the entire screen without a mouse, and snapping on a lightweight magnetic keyboard keeps it incredibly agile.
+          </p>
+        </div>
 
         {/* CTA */}
         <div className="post-cta">
-          <h2>Set up your first pair</h2>
+          <h2>Create Your First App Pair Today</h2>
           <p>
-            Free for your first 3 pairs. Pro unlocks unlimited pairs with a
-            one-time purchase.
+            Free for your first 3 pairs. Upgrade to Pro via a single one-time purchase to unlock unlimited layouts.
           </p>
           <a
             className="appstore-btn"
@@ -269,7 +247,6 @@ export default function GuidePage() {
             target="_blank"
             rel="noopener"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo.svg"
               alt="Splicon"
@@ -280,11 +257,10 @@ export default function GuidePage() {
             <span className="appstore-btn-text">
               <span className="appstore-btn-sub">Download on the</span>
               <span className="appstore-btn-name">App Store</span>
-              <span className="appstore-btn-platform">iPad · iPadOS 17+</span>
+              <span className="appstore-btn-platform">iPad · iPadOS 15+</span>
             </span>
           </a>
         </div>
-
       </article>
     </main>
   );
