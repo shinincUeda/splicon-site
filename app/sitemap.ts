@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPostsMeta } from "@/lib/posts";
 
-const SITE = "https://split-icon.vercel.app";
+const SITE = "https://www.splitview.net";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const enPosts = getAllPostsMeta("en").map((p) => ({

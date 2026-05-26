@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../blog/blog.css";
 import "./guide.css";
 
-const SITE = "https://split-icon.vercel.app";
+const SITE = "https://www.splitview.net";
 const URL = `${SITE}/en/guide`;
 
 export const metadata: Metadata = {

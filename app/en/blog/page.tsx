@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   description:
     "Setup guides for the best iPad Split View app pairs — ChatGPT + YouTube, Notion + Slack, and more. Make each one a one-tap shortcut.",
   alternates: {
-    canonical: "https://split-icon.vercel.app/en/blog",
+    canonical: "https://www.splitview.net/en/blog",
     languages: {
-      "en": "https://split-icon.vercel.app/en/blog",
-      "x-default": "https://split-icon.vercel.app/en/blog",
+      "en": "https://www.splitview.net/en/blog",
+      "x-default": "https://www.splitview.net/en/blog",
     },
   },
 };

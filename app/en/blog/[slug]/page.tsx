@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug, "en");
   if (!post) return {};
-  const url = `https://split-icon.vercel.app/en/blog/${post.slug}`;
+  const url = `https://www.splitview.net/en/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.description,
