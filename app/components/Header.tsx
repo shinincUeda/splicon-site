@@ -26,6 +26,7 @@ export default function Header({ lang = "ja" }: { lang?: "ja" | "en" }) {
           <>
             <a href="/en#features" className="nav-hide-sp">Features</a>
             <a href="/en#pricing"  className="nav-hide-sp">Pricing</a>
+            <a href="/en/guide">Guide</a>
             <a href="/en/blog">Blog</a>
             <a href="/" className="nav-lang">JA</a>
           </>
