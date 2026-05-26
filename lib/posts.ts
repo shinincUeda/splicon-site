@@ -86,6 +86,8 @@ export async function getPostBySlug(
     date: data.date ?? "",
     appA: data.appA ?? "",
     appB: data.appB ?? "",
+    iconA: data.iconA ?? "",
+    iconB: data.iconB ?? "",
     keywords: data.keywords ?? [],
     contentHtml,
   };
