@@ -20,7 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: SITE, lastModified: new Date().toISOString(), priority: 1 },
+    { url: `${SITE}/en`, lastModified: new Date().toISOString(), priority: 1 },
     { url: `${SITE}/en/blog`, lastModified: new Date().toISOString(), priority: 0.8 },
+    { url: `${SITE}/privacy-policy`, lastModified: new Date().toISOString(), changeFrequency: "yearly" as const, priority: 0.3 },
+    { url: `${SITE}/privacy-policy-en`, lastModified: new Date().toISOString(), changeFrequency: "yearly" as const, priority: 0.3 },
+    { url: `${SITE}/support`, lastModified: new Date().toISOString(), changeFrequency: "monthly" as const, priority: 0.4 },
+    { url: `${SITE}/support-en`, lastModified: new Date().toISOString(), changeFrequency: "monthly" as const, priority: 0.4 },
     ...enPosts,
     ...jaPosts,
   ];
