@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: "/blog", destination: "/en/blog", permanent: true },
+      { source: "/blog/:slug", destination: "/en/blog/:slug", permanent: true },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [

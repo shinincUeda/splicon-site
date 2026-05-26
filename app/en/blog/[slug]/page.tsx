@@ -3,16 +3,17 @@ import { notFound } from "next/navigation";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 import "../blog.css";
 
-type Params = { params: { slug: string } };
+type Params = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+  return getAllPostSlugs("en").map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug, "en");
   if (!post) return {};
-  const url = `https://split-icon.vercel.app/blog/${post.slug}`;
+  const url = `https://split-icon.vercel.app/en/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }: Params) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug, "en");
   if (!post) notFound();
 
   const jsonLd = {
@@ -52,7 +54,7 @@ export default async function PostPage({ params }: Params) {
       />
       <article className="post-article">
         <p className="post-breadcrumb">
-          <a href="/blog">Combos</a> / {post.appA} × {post.appB}
+          <a href="/en/blog">Combos</a> / {post.appA} × {post.appB}
         </p>
         <h1 className="post-h1">{post.title}</h1>
         <p className="post-sub">{post.description}</p>
@@ -64,15 +66,21 @@ export default async function PostPage({ params }: Params) {
           <h2>Make this pair a one-tap shortcut</h2>
           <p>
             Splicon generates the side-by-side icon for {post.appA} and{" "}
-            {post.appB} in seconds.
+            {post.appB} in seconds. Free for your first 3 pairs.
           </p>
           <a
-            className="btn-primary"
-            href="https://apps.apple.com/app/splicon"
+            className="appstore-btn"
+            href="https://apps.apple.com/us/app/splicon-split-view-icon-maker/id6762535752"
             target="_blank"
             rel="noopener"
           >
-            Get Splicon on the App Store
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.svg" alt="Splicon" className="appstore-btn-icon" width={44} height={44} />
+            <span className="appstore-btn-text">
+              <span className="appstore-btn-sub">Download on the</span>
+              <span className="appstore-btn-name">App Store</span>
+              <span className="appstore-btn-platform">iPad · iPadOS 17+</span>
+            </span>
           </a>
         </div>
       </article>

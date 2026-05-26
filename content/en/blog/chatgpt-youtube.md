@@ -4,6 +4,8 @@ description: "Watch a tutorial and ask ChatGPT to explain it at the same time. H
 date: "2026-05-23"
 appA: "ChatGPT"
 appB: "YouTube"
+iconA: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/cb/cc/f6/cbccf633-139f-3201-235f-f176adafbf5f/AppIcon-0-0-1x_U007epad-0-0-0-1-0-P3-85-220.png/512x512bb.jpg"
+iconB: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f4/be/00/f4be0087-8a58-906a-ba4a-5bb66e5c276a/logo_youtube_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/512x512bb.jpg"
 keywords: ["chatgpt youtube split view", "ipad split screen", "watch and ask ai", "youtube tutorial notes ipad", "split view shortcut"]
 ---
 

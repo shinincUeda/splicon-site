@@ -204,6 +204,152 @@
   font-size: .97rem;
 }
 
+/* ---- App Store button ---- */
+.appstore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #000;
+  color: #fff;
+  padding: 12px 20px 12px 14px;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+}
+.appstore-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+}
+.appstore-btn-icon {
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.appstore-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.2;
+}
+.appstore-btn-sub {
+  font-size: .68rem;
+  font-weight: 400;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .01em;
+}
+.appstore-btn-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+.appstore-btn-platform {
+  font-size: .65rem;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .02em;
+}
+
+/* ---- Search ---- */
+.blog-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2.4rem;
+}
+.blog-search {
+  flex: 1;
+  max-width: 360px;
+  padding: .6rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: .95rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.blog-search:focus {
+  border-color: var(--accent);
+}
+.blog-search-count {
+  font-size: .85rem;
+  color: var(--ink-faint);
+}
+
+/* ---- Card grid ---- */
+.post-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-soft);
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+}
+.post-card-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.app-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.app-icon-fallback {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.icon-x {
+  font-size: 1.1rem;
+  color: var(--ink-faint);
+  line-height: 1;
+}
+.post-card-pair {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+.post-card-title {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.post-card-desc {
+  font-size: .82rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 640px) {
   .post-list a {
@@ -216,5 +362,9 @@
   }
   .post-cta {
     padding: 1.6rem;
+  }
+  .post-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
   }
 }

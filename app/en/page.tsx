@@ -25,7 +25,7 @@ export default function HomePage() {
           <div className="hero-actions">
             <a
               className="btn-primary"
-              href="https://apps.apple.com/app/splicon"
+              href="https://apps.apple.com/us/app/splicon-split-view-icon-maker/id6762535752"
               target="_blank"
               rel="noopener"
             >
@@ -124,7 +124,7 @@ export default function HomePage() {
             {combos.map((c, i) => (
               <a
                 key={c.slug}
-                href={`/blog/${c.slug}`}
+                href={`/en/blog/${c.slug}`}
                 className={`combo-card ${i === 0 ? "combo-card--lead" : ""}`}
               >
                 <span className="combo-pair">
@@ -147,7 +147,7 @@ export default function HomePage() {
         <h2>Stop rebuilding Split View every day.</h2>
         <a
           className="btn-primary btn-lg"
-          href="https://apps.apple.com/app/splicon"
+          href="https://apps.apple.com/us/app/splicon-split-view-icon-maker/id6762535752"
           target="_blank"
           rel="noopener"
         >

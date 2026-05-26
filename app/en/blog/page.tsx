@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { getAllPostsMeta } from "@/lib/posts";
+import BlogList from "./BlogList";
 import "./blog.css";
 
 export const metadata: Metadata = {
   title: "Split View Combos for iPad",
   description:
     "Setup guides for the best iPad Split View app pairs — ChatGPT + YouTube, Notion + Slack, and more. Make each one a one-tap shortcut.",
-  alternates: { canonical: "https://split-icon.vercel.app/blog" },
+  alternates: { canonical: "https://split-icon.vercel.app/en/blog" },
 };
 
 export default function BlogIndex() {
-  const posts = getAllPostsMeta();
+  const posts = getAllPostsMeta("en");
 
   return (
     <main className="blog-index">
@@ -23,25 +24,7 @@ export default function BlogIndex() {
         </p>
       </header>
 
-      {posts.length === 0 ? (
-        <p className="blog-empty">
-          No combo guides published yet. They&apos;re coming soon.
-        </p>
-      ) : (
-        <ul className="post-list">
-          {posts.map((p) => (
-            <li key={p.slug}>
-              <a href={`/blog/${p.slug}`}>
-                <span className="post-pair">
-                  {p.appA} <span className="x">×</span> {p.appB}
-                </span>
-                <span className="post-title">{p.title}</span>
-                <span className="post-desc">{p.description}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <BlogList posts={posts} />
     </main>
   );
 }
