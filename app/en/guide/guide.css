@@ -1,0 +1,74 @@
+.guide-article {
+  max-width: 720px;
+}
+
+.guide-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.guide-compare-col {
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.guide-compare-before {
+  background: #fff4f4;
+  border: 1px solid #fcc;
+}
+
+.guide-compare-after {
+  background: #f2faf4;
+  border: 1px solid #b6e2c0;
+}
+
+.guide-compare-label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  color: #666;
+}
+
+.guide-compare-result {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.guide-compare-before ol,
+.guide-compare-after ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.guide-steps {
+  padding-left: 1.4rem;
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.guide-steps li {
+  margin-bottom: 0.5rem;
+}
+
+.guide-combo-list {
+  padding-left: 1.2rem;
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.guide-combo-list li {
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .guide-compare {
+    grid-template-columns: 1fr;
+  }
+}
