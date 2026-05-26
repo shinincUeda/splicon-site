@@ -29,3 +29,7 @@ Thumbs.db
 .vscode/
 .idea/
 .vercel
+
+# Claude Code
+.claude/
+CLAUDE.md
