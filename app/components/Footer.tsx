@@ -11,7 +11,7 @@ export default function Footer({ lang = "ja" }: { lang?: "ja" | "en" }) {
     <footer className="site-footer">
       <p>© {new Date().getFullYear()} shin-inc. All rights reserved.</p>
       <div className="site-footer-links">
-        <a href={isEn ? "/en/blog" : "/blog"}>Blog</a>
+        <a href={isEn ? "/en/blog" : "/ja/blog"}>{isEn ? "Blog" : "ブログ"}</a>
         <a href={isEn ? "/en/support" : "/support"}>
           {isEn ? "Support" : "サポート"}
         </a>

@@ -34,7 +34,7 @@ export default function Header({ lang = "ja" }: { lang?: "ja" | "en" }) {
           <>
             <a href="/#features" className="nav-hide-sp">機能</a>
             <a href="/#pricing"  className="nav-hide-sp">価格</a>
-            <a href="/en/blog">Blog</a>
+            <a href="/ja/blog">ブログ</a>
             <a href="/en" className="nav-lang">EN</a>
           </>
         )}

@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE, lastModified: new Date().toISOString(), priority: 1 },
     { url: `${SITE}/en`, lastModified: new Date().toISOString(), priority: 1 },
+    { url: `${SITE}/ja/blog`, lastModified: new Date().toISOString(), priority: 0.8 },
     { url: `${SITE}/en/blog`, lastModified: new Date().toISOString(), priority: 0.8 },
     { url: `${SITE}/en/guide`, lastModified: new Date().toISOString(), changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${SITE}/privacy-policy`, lastModified: new Date().toISOString(), changeFrequency: "yearly" as const, priority: 0.3 },
